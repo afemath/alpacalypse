@@ -1,0 +1,224 @@
+<html><head><base href="." />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>THE ALPACALYPSE IS COMING</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: #1a0f0f;
+    color: #ff3333;
+    font-family: 'Courier New', monospace;
+    overflow-x: hidden;
+  }
+
+  .warning-header {
+    background: #ff3333;
+    color: #1a0f0f;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    animation: glitch 1s infinite;
+  }
+
+  .logo {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto; /* Removed bottom margin */
+    display: block;
+  }
+
+  @keyframes glitch {
+    0% { transform: skewX(0deg); }
+    20% { transform: skewX(-10deg); }
+    40% { transform: skewX(10deg); }
+    60% { transform: skewX(-10deg); }
+    80% { transform: skewX(10deg); }
+    100% { transform: skewX(0deg); }
+  }
+
+  .evil-alpaca {
+    animation: march 20s linear infinite;
+  }
+
+  @keyframes march {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+  }
+
+  .countdown {
+    text-align: center;
+    font-size: 2em;
+    margin: 20px;
+  }
+
+  .warning-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .emergency-button {
+    background: #ff3333;
+    color: #1a0f0f;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    margin: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .emergency-button:hover {
+    background: #ff0000;
+    transform: scale(1.1);
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+  }
+
+  .modal-content {
+    background: #1a0f0f;
+    border: 3px solid #ff3333;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    position: relative;
+    animation: modalSlide 0.5s ease-out;
+  }
+
+  @keyframes modalSlide {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+  }
+
+  .response-steps {
+    text-align: left;
+    margin: 20px 0;
+  }
+
+  .close-modal {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #ff3333;
+  }
+
+  .response-steps li {
+    opacity: 0;
+  }
+</style>
+</head>
+<body>
+  <div class="warning-header">
+    <h1>EMERGENCY ALERT</h1>
+    <h2>THE ALPACALYPSE IS IMMINENT</h2>
+  </div>
+
+  <img src="/alpaca_evil.jpgs" alt="Evil Alpaca Logo" class="logo">
+
+  <div class="countdown">
+    Time until Alpacalypse: <span id="timer">Loading...</span>
+  </div>
+
+  <div class="warning-content">
+    <h2>WARNING SIGNS OF THE ALPACALYPSE</h2>
+    <ul style="list-style-type: none;">
+      <li>Suspicious gathering of alpacas in urban areas</li>
+      <li>Unexplained disappearance of wool products</li>
+      <li>Alpacas developing opposable thumbs</li>
+      <li>Increased alpaca intelligence and organization</li>
+      <li>Mysterious wool-based technology appearing worldwide</li>
+    </ul>
+
+    <h2>SURVIVAL TIPS</h2>
+    <p>1. DO NOT trust alpacas wearing sunglasses</p>
+    <p>2. Keep all yarn and knitting supplies in a secure location</p>
+    <p>3. Avoid eye contact with suspicious-looking camelids</p>
+    <p>4. Join your local anti-alpacalypse defense force</p>
+
+    <button class="emergency-button" onclick="reportAlpaca()">
+      REPORT SUSPICIOUS ALPACA ACTIVITY
+    </button>
+  </div>
+
+  <div id="reportModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">×</span>
+      <h2>ALPACA ACTIVITY REPORTED</h2>
+      <div class="response-steps">
+        <h3>REPORT PROCESSING PROTOCOL:</h3>
+        <ol>
+          <li>Your report has been logged in the Global Alpaca Threat Database (GATD)</li>
+          <li>Local Anti-Alpaca Task Force (LAATF) has been notified</li>
+          <li>Wool Detection Units are being dispatched to your area</li>
+          <li>Surveillance drones will monitor for suspicious fiber-based activities</li>
+          <li>Emergency Yarn Protection Protocol activated in your sector</li>
+        </ol>
+        <h3>NEXT STEPS:</h3>
+        <ul>
+          <li>Stay indoors and away from any suspicious wool products</li>
+          <li>Monitor local emergency broadcasts for updates</li>
+          <li>Do not attempt to reason with or negotiate with alpacas</li>
+          <li>Keep your emergency anti-wool kit ready</li>
+        </ul>
+        <p style="color: #ff0000; font-weight: bold;">Remember: Trust No Alpaca!</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function updateTimer() {
+      const apocalypseDate = new Date('2024-12-26T17:30:00-06:00').getTime(); // Updated to December 26th, 2024, 5:30 PM Central Time
+      const now = new Date().getTime();
+      const distance = apocalypseDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('timer').innerHTML = 
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    function reportAlpaca() {
+      const modal = document.getElementById('reportModal');
+      modal.style.display = 'block';
+      
+      const steps = document.querySelectorAll('.response-steps li');
+      steps.forEach((step, index) => {
+        setTimeout(() => {
+          step.style.opacity = '1';
+        }, index * 500);
+      });
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('reportModal');
+      modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('reportModal');
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
