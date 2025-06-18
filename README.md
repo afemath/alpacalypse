@@ -1,5 +1,7 @@
 # Alpacalypse
 
+**URL**: https://afemath.github.io/alpacalypse
+
 ## Purpose
 To play with AI tools and learn about them together with my 14-year-old niece. She choose the amazing topic.
 
